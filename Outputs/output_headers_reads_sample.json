@@ -1,0 +1,45 @@
+{
+	"connection_key": "request",
+	"result": true,
+	"redis_key": "abcdefg",
+	"filepath": "/var/lib/aion/Data/rededge_sdc/abcdef.json",
+	"api_status_code": 200,
+	"runtime_session_id": "boi9ar543dg91ipdnspi099u231280ab0v8af0ew",
+	"business_partner": 101,
+	"service_label": "OPERATIONS",
+	"api_type": "reads",
+	"message": {
+		"Header": [
+			{
+				"Operations": 310000001,
+				"Product": "A3750",
+				"OwnerBusinessPartner": 101,
+				"OwnerPlant": "AB01",
+				"OperationsText": null,
+				"OperationsStatus": null,
+				"ResponsiblePlannerGroup": null,
+				"ValidityStartDate": "2000-01-01",
+				"ValidityEndDate": "9999-12-31",
+				"CreationDate": "2023-05-01",
+				"LastChangeDate": "2023-05-01",
+				"PlainLongText": null,
+				"IsMarkedForDeletion": false
+			}
+		],
+		"Item": null,
+		"ComponentAllocation": null
+	},
+	"api_schema": "DPFMOperationsReads",
+	"accepter": [
+		"Headers"
+	],
+	"deleted": false,
+	"sql_update_result": null,
+	"sql_update_error": "",
+	"subfunc_result": null,
+	"subfunc_error": "",
+	"exconf_result": null,
+	"exconf_error": "",
+	"api_processing_result": true,
+	"api_processing_error": ""
+}
