@@ -89,8 +89,8 @@ func (c *DPFMAPICaller) Headers(
 	log *logger.Logger,
 ) *[]dpfm_api_output_formatter.Header {
 	where := "WHERE 1 = 1"
-	if input.Header.OwnerBusinessPartner != nil {
-		where = fmt.Sprintf("%s\nAND OwnerBusinessPartner = %v", where, *input.Header.OwnerBusinessPartner)
+	if input.Header.OwnerProductionBusinessPartner != nil {
+		where = fmt.Sprintf("%s\nAND OwnerProductionBusinessPartner = %v", where, *input.Header.OwnerProductionBusinessPartner)
 	}
 	if input.Header.IsMarkedForDeletion != nil {
 		where = fmt.Sprintf("%s\nAND IsMarkedForDeletion = %v", where, *input.Header.IsMarkedForDeletion)
@@ -129,7 +129,7 @@ func (c *DPFMAPICaller) Item(
 
 	cnt := 0
 	for _, v := range item {
-		args = append(args, operations, v.OpeartionsItem)
+		args = append(args, operations, v.OperationsItem)
 		cnt++
 	}
 
