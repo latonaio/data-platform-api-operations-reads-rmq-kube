@@ -82,8 +82,11 @@ type Header struct {
 	DepartureDeliverFromPlant                *string `json:"DepartureDeliverFromPlant"`
 	DestinationDeliverToParty                *int    `json:"DestinationDeliverToParty"`
 	DestinationDeliverToPlant                *string `json:"DestinationDeliverToPlant"`
-	OwnerProductionBusinessPartner           *int    `json:"OwnerProductionBusinessPartner"`
+	OwnerProductionPlantBusinessPartner      *int    `json:"OwnerProductionPlantBusinessPartner"`
 	OwnerProductionPlant                     *string `json:"OwnerProductionPlant"`
+	ProductBaseUnit                          *string `json:"ProductBaseUnit"`
+	ProductDeliveryUnit                      *string `json:"ProductDeliveryUnit"`
+	ProductProductionUnit                    *string `json:"ProductProductionUnit"`
 	OperationsText                           *string `json:"OperationsText"`
 	OperationsStatus                         *string `json:"OperationsStatus"`
 	ResponsiblePlannerGroup                  *string `json:"ResponsiblePlannerGroup"`
@@ -103,29 +106,29 @@ type Item struct {
 	SupplyChainRelationshipDeliveryID        int      `json:"SupplyChainRelationshipDeliveryID"`
 	SupplyChainRelationshipDeliveryPlantID   int      `json:"SupplyChainRelationshipDeliveryPlantID"`
 	SupplyChainRelationshipProductionPlantID int      `json:"SupplyChainRelationshipProductionPlantID"`
-	Product                                  *string  `json:"Product"`
-	Buyer                                    *int     `json:"Buyer"`
-	Seller                                   *int     `json:"Seller"`
-	DeliverFromParty                         *int     `json:"DeliverFromParty"`
-	DeliverFromPlant                         *string  `json:"DeliverFromPlant"`
-	DeliverToParty                           *int     `json:"DeliverToParty"`
-	DeliverToPlant                           *string  `json:"DeliverToPlant"`
-	ProductionPlantBusinessPartner           *int     `json:"ProductionPlantBusinessPartner"`
-	ProductionPlant                          *string  `json:"ProductionPlant"`
-	OperationsText                           *string  `json:"OperationsText"`
+	Product                                  string   `json:"Product"`
+	Buyer                                    int      `json:"Buyer"`
+	Seller                                   int      `json:"Seller"`
+	DeliverFromParty                         int      `json:"DeliverFromParty"`
+	DeliverFromPlant                         string   `json:"DeliverFromPlant"`
+	DeliverToParty                           int      `json:"DeliverToParty"`
+	DeliverToPlant                           string   `json:"DeliverToPlant"`
+	ProductionPlantBusinessPartner           int      `json:"ProductionPlantBusinessPartner"`
+	ProductionPlant                          string   `json:"ProductionPlant"`
+	OperationsText                           string   `json:"OperationsText"`
 	BillOfMaterial                           *int     `json:"BillOfMaterial"`
-	OperationsStatus                         *string  `json:"OperationsStatus"`
-	ResponsiblePlannerGroup                  *string  `json:"ResponsiblePlannerGroup"`
-	OperationsUnit                           *string  `json:"OperationsUnit"`
+	OperationsStatus                         string   `json:"OperationsStatus"`
+	ResponsiblePlannerGroup                  string   `json:"ResponsiblePlannerGroup"`
+	OperationsUnit                           string   `json:"OperationsUnit"`
 	StandardLotSizeQuantity                  *float32 `json:"StandardLotSizeQuantity"`
 	MinimumLotSizeQuantity                   *float32 `json:"MinimumLotSizeQuantity"`
 	MaximumLotSizeQuantity                   *float32 `json:"MaximumLotSizeQuantity"`
-	PlainLongText                            *string  `json:"PlainLongText"`
+	PlainLongText                            string   `json:"PlainLongText"`
 	WorkCenter                               *int     `json:"WorkCenter"`
-	ValidityStartDate                        *string  `json:"ValidityStartDate"`
-	ValidityEndDate                          *string  `json:"ValidityEndDate"`
-	CreationDate                             *string  `json:"CreationDate"`
-	LastChangeDate                           *string  `json:"LastChangeDate"`
+	ValidityStartDate                        string   `json:"ValidityStartDate"`
+	ValidityEndDate                          string   `json:"ValidityEndDate"`
+	CreationDate                             string   `json:"CreationDate"`
+	LastChangeDate                           string   `json:"LastChangeDate"`
 	IsMarkedForDeletion                      *bool    `json:"IsMarkedForDeletion"`
 }
 

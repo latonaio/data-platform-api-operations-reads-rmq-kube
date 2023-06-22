@@ -13,15 +13,18 @@ type Header struct {
 	DepartureDeliverFromPlant                string  `json:"DepartureDeliverFromPlant"`
 	DestinationDeliverToParty                int     `json:"DestinationDeliverToParty"`
 	DestinationDeliverToPlant                string  `json:"DestinationDeliverToPlant"`
-	OwnerProductionBusinessPartner           int     `json:"OwnerProductionBusinessPartner"`
+	OwnerProductionPlantBusinessPartner      int     `json:"OwnerProductionPlantBusinessPartner"`
 	OwnerProductionPlant                     string  `json:"OwnerProductionPlant"`
-	OperationsText                           *string `json:"OperationsText"`
+	ProductBaseUnit                          string  `json:"ProductBaseUnit"`
+	ProductDeliveryUnit                      string  `json:"ProductDeliveryUnit"`
+	ProductProductionUnit                    string  `json:"ProductProductionUnit"`
+	OperationsText                           string  `json:"OperationsText"`
 	OperationsStatus                         *string `json:"OperationsStatus"`
 	ResponsiblePlannerGroup                  *string `json:"ResponsiblePlannerGroup"`
 	PlainLongText                            *string `json:"PlainLongText"`
 	ValidityStartDate                        *string `json:"ValidityStartDate"`
 	ValidityEndDate                          *string `json:"ValidityEndDate"`
-	CreationDate                             *string `json:"CreationDate"`
-	LastChangeDate                           *string `json:"LastChangeDate"`
+	CreationDate                             string  `json:"CreationDate"`
+	LastChangeDate                           string  `json:"LastChangeDate"`
 	IsMarkedForDeletion                      *bool   `json:"IsMarkedForDeletion"`
 }
