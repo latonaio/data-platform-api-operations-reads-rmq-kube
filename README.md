@@ -1,7 +1,7 @@
 # data-platform-api-operations-reads-rmq-kube
 
-data-platform-api-operations-reads-rmq-kube は、周辺業務システム を データ連携基盤 と統合することを目的に、API で作業手順データを登録するマイクロサービスです。  
-https://xxx.xxx.io/api/API_OPERATIONS_SRV/creates/
+data-platform-api-operations-reads-rmq-kube は、周辺業務システム を データ連携基盤 と統合することを目的に、API で作業手順データを取得するマイクロサービスです。  
+https://xxx.xxx.io/api/API_OPERATIONS_SRV/reads/
 
 ## 動作環境
 
@@ -20,8 +20,8 @@ data-platform-api-operations-reads-rmq-kube には、次の API をコールす�
 
 * A_Header（データ連携基盤 作業手順 - ヘッダデータ）
 * A_Item（データ連携基盤 作業手順 - 明細データ）
-* A_ComponentAllocation（データ連携基盤 作業手順 - 構成品目割当データ）
-
+* A_ItemOperation（データ連携基盤 作業手順 - 明細作業データ）
+* A_ItemOperationComponent（データ連携基盤 作業手順 - 明細作業構成品目データ）
 
 ## API への 値入力条件 の 初期値
 data-platform-api-operations-reads-rmq-kube において、API への値入力条件の初期値は、入力ファイルレイアウトの種別毎に、次の通りとなっています。  
@@ -39,8 +39,6 @@ accepter において 下記の例のように、データの種別（＝APIの�
 ```
 	"api_schema": "DPFMOperationsReads",
 	"accepter": ["Header"],
-	"operations": null,
-	"deleted": false
 ```
   
 * 全データを取得する際のsample.jsonの記載例(2)  
@@ -50,8 +48,6 @@ accepter において 下記の例のように、データの種別（＝APIの�
 ```
 	"api_schema": "DPFMOperationsReads",
 	"accepter": ["All"],
-	"operations": null,
-	"deleted": false
 ```
 
 ## 指定されたデータ種別のコール
@@ -79,7 +75,7 @@ func (c *DPFMAPICaller) AsyncOperationsReads(
 
 ## Output  
 本マイクロサービスでは、[golang-logging-library-for-data-platform](https://github.com/latonaio/golang-logging-library-for-data-platform) により、以下のようなデータがJSON形式で出力されます。  
-以下の sample.json の例は 部品表(BOM) の ヘッダデータ が取得された結果の JSON の例です。  
+以下の sample.json の例は 作業手順 の ヘッダデータ が取得された結果の JSON の例です。  
 以下の項目のうち、"ProductionPlantBusinessPartner" ～ "HeaderIsMarkedForDeletion" は、/DPFM_API_Output_Formatter/type.go 内 の Type Header {} による出力結果です。"cursor" ～ "time"は、golang-logging-library による 定型フォーマットの出力結果です。  
 
 ```

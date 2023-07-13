@@ -7,16 +7,16 @@ type Item struct {
 	SupplyChainRelationshipDeliveryID        int      `json:"SupplyChainRelationshipDeliveryID"`
 	SupplyChainRelationshipDeliveryPlantID   int      `json:"SupplyChainRelationshipDeliveryPlantID"`
 	SupplyChainRelationshipProductionPlantID int      `json:"SupplyChainRelationshipProductionPlantID"`
-	Product                                  *string  `json:"Product"`
-	Buyer                                    *int     `json:"Buyer"`
-	Seller                                   *int     `json:"Seller"`
-	DeliverFromParty                         *int     `json:"DeliverFromParty"`
-	DeliverFromPlant                         *string  `json:"DeliverFromPlant"`
-	DeliverToParty                           *int     `json:"DeliverToParty"`
-	DeliverToPlant                           *string  `json:"DeliverToPlant"`
-	ProductionPlantBusinessPartner           *int     `json:"ProductionPlantBusinessPartner"`
-	ProductionPlant                          *string  `json:"ProductionPlant"`
-	OperationsText                           *string  `json:"OperationsText"`
+	Product                                  string   `json:"Product"`
+	Buyer                                    int      `json:"Buyer"`
+	Seller                                   int      `json:"Seller"`
+	DeliverToParty                           int      `json:"DeliverToParty"`
+	DeliverToPlant                           string   `json:"DeliverToPlant"`
+	DeliverFromParty                         int      `json:"DeliverFromParty"`
+	DeliverFromPlant                         string   `json:"DeliverFromPlant"`
+	ProductionPlantBusinessPartner           int      `json:"ProductionPlantBusinessPartner"`
+	ProductionPlant                          string   `json:"ProductionPlant"`
+	OperationsText                           string   `json:"OperationsText"`
 	BillOfMaterial                           *int     `json:"BillOfMaterial"`
 	OperationsStatus                         *string  `json:"OperationsStatus"`
 	ResponsiblePlannerGroup                  *string  `json:"ResponsiblePlannerGroup"`
@@ -28,7 +28,7 @@ type Item struct {
 	WorkCenter                               *int     `json:"WorkCenter"`
 	ValidityStartDate                        *string  `json:"ValidityStartDate"`
 	ValidityEndDate                          *string  `json:"ValidityEndDate"`
-	CreationDate                             *string  `json:"CreationDate"`
-	LastChangeDate                           *string  `json:"LastChangeDate"`
+	CreationDate                             string   `json:"CreationDate"`
+	LastChangeDate                           string   `json:"LastChangeDate"`
 	IsMarkedForDeletion                      *bool    `json:"IsMarkedForDeletion"`
 }

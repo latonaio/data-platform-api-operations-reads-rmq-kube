@@ -24,10 +24,10 @@ func ConvertToHeader(rows *sql.Rows) (*[]Header, error) {
 			&pm.Product,
 			&pm.Buyer,
 			&pm.Seller,
-			&pm.DepartureDeliverFromParty,
-			&pm.DepartureDeliverFromPlant,
 			&pm.DestinationDeliverToParty,
 			&pm.DestinationDeliverToPlant,
+			&pm.DepartureDeliverFromParty,
+			&pm.DepartureDeliverFromPlant,
 			&pm.OwnerProductionPlantBusinessPartner,
 			&pm.OwnerProductionPlant,
 			&pm.ProductBaseUnit,
@@ -58,10 +58,10 @@ func ConvertToHeader(rows *sql.Rows) (*[]Header, error) {
 			Product:                                  data.Product,
 			Buyer:                                    data.Buyer,
 			Seller:                                   data.Seller,
-			DepartureDeliverFromParty:                data.DepartureDeliverFromParty,
-			DepartureDeliverFromPlant:                data.DepartureDeliverFromPlant,
 			DestinationDeliverToParty:                data.DestinationDeliverToParty,
 			DestinationDeliverToPlant:                data.DestinationDeliverToPlant,
+			DepartureDeliverFromParty:                data.DepartureDeliverFromParty,
+			DepartureDeliverFromPlant:                data.DepartureDeliverFromPlant,
 			OwnerProductionPlantBusinessPartner:      data.OwnerProductionPlantBusinessPartner,
 			OwnerProductionPlant:                     data.OwnerProductionPlant,
 			ProductBaseUnit:                          data.ProductBaseUnit,
@@ -105,10 +105,10 @@ func ConvertToItem(rows *sql.Rows) (*[]Item, error) {
 			&pm.Product,
 			&pm.Buyer,
 			&pm.Seller,
-			&pm.DeliverFromParty,
-			&pm.DeliverFromPlant,
 			&pm.DeliverToParty,
 			&pm.DeliverToPlant,
+			&pm.DeliverFromParty,
+			&pm.DeliverFromPlant,
 			&pm.ProductionPlantBusinessPartner,
 			&pm.ProductionPlant,
 			&pm.OperationsText,
@@ -143,10 +143,10 @@ func ConvertToItem(rows *sql.Rows) (*[]Item, error) {
 			Product:                                  data.Product,
 			Buyer:                                    data.Buyer,
 			Seller:                                   data.Seller,
-			DeliverFromParty:                         data.DeliverFromParty,
-			DeliverFromPlant:                         data.DeliverFromPlant,
 			DeliverToParty:                           data.DeliverToParty,
 			DeliverToPlant:                           data.DeliverToPlant,
+			DeliverFromParty:                         data.DeliverFromParty,
+			DeliverFromPlant:                         data.DeliverFromPlant,
 			ProductionPlantBusinessPartner:           data.ProductionPlantBusinessPartner,
 			ProductionPlant:                          data.ProductionPlant,
 			OperationsText:                           data.OperationsText,
@@ -174,48 +174,232 @@ func ConvertToItem(rows *sql.Rows) (*[]Item, error) {
 	return &item, nil
 }
 
-func ConvertToComponentAllocation(rows *sql.Rows) (*[]ComponentAllocation, error) {
+func ConvertToItemOperation(rows *sql.Rows) (*[]ItemOperation, error) {
 	defer rows.Close()
-	componentAllocation := make([]ComponentAllocation, 0)
+	itemOperation := make([]ItemOperation, 0)
 
 	i := 0
 	for rows.Next() {
 		i++
-		pm := &requests.ComponentAllocation{}
+		pm := &requests.ItemOperation{}
 
 		err := rows.Scan(
 			&pm.Operations,
 			&pm.OperationsItem,
+			&pm.OperationID,
+			&pm.SupplyChainRelationshipID,
+			&pm.SupplyChainRelationshipDeliveryID,
+			&pm.SupplyChainRelationshipDeliveryPlantID,
+			&pm.SupplyChainRelationshipProductionPlantID,
+			&pm.Product,
+			&pm.Buyer,
+			&pm.Seller,
+			&pm.DeliverToParty,
+			&pm.DeliverToPlant,
+			&pm.DeliverFromParty,
+			&pm.DeliverFromPlant,
+			&pm.ProductionPlantBusinessPartner,
+			&pm.ProductionPlant,
+			&pm.Sequence,
+			&pm.SequenceText,
+			&pm.OperationText,
+			&pm.OperationStatus,
+			&pm.ResponsiblePlannerGroup,
+			&pm.OperationUnit,
+			&pm.StandardLotSizeQuantity,
+			&pm.MinimumLotSizeQuantity,
+			&pm.MaximumLotSizeQuantity,
+			&pm.PlainLongText,
+			&pm.WorkCenter,
+			&pm.CapacityCategoryCode,
+			&pm.OperationCostingRelevancyType,
+			&pm.OperationSetupType,
+			&pm.OperationSetupGroupCategory,
+			&pm.OperationSetupGroup,
+			&pm.OperationReferenceQuantity,
+			&pm.MaximumWaitDuration,
+			&pm.StandardWaitDuration,
+			&pm.MinimumWaitDuration,
+			&pm.WaitDurationUnit,
+			&pm.MaximumQueueDuration,
+			&pm.StandardQueueDuration,
+			&pm.MinimumQueueDuration,
+			&pm.QueueDurationUnit,
+			&pm.MaximumMoveDuration,
+			&pm.StandardMoveDuration,
+			&pm.MinimumMoveDuration,
+			&pm.MoveDurationUnit,
+			&pm.StandardDeliveryDuration,
+			&pm.StandardDeliveryDurationUnit,
+			&pm.StandardOperationScrapPercent,
+			&pm.CostElement,
+			&pm.ValidityStartDate,
+			&pm.ValidityEndDate,
+			&pm.CreationDate,
+			&pm.LastChangeDate,
+			&pm.IsMarkedForDeletion,
+		)
+		if err != nil {
+			fmt.Printf("err = %+v \n", err)
+			return &itemOperation, err
+		}
+
+		data := pm
+		itemOperation = append(itemOperation, ItemOperation{
+
+			Operations:                               data.Operations,
+			OperationsItem:                           data.OperationsItem,
+			OperationID:                              data.OperationID,
+			SupplyChainRelationshipID:                data.SupplyChainRelationshipID,
+			SupplyChainRelationshipDeliveryID:        data.SupplyChainRelationshipDeliveryID,
+			SupplyChainRelationshipDeliveryPlantID:   data.SupplyChainRelationshipDeliveryPlantID,
+			SupplyChainRelationshipProductionPlantID: data.SupplyChainRelationshipProductionPlantID,
+			Product:                                  data.Product,
+			Buyer:                                    data.Buyer,
+			Seller:                                   data.Seller,
+			DeliverToParty:                           data.DeliverToParty,
+			DeliverToPlant:                           data.DeliverToPlant,
+			DeliverFromParty:                         data.DeliverFromParty,
+			DeliverFromPlant:                         data.DeliverFromPlant,
+			ProductionPlantBusinessPartner:           data.ProductionPlantBusinessPartner,
+			ProductionPlant:                          data.ProductionPlant,
+			Sequence:                                 data.Sequence,
+			SequenceText:                             data.SequenceText,
+			OperationText:                            data.OperationText,
+			OperationStatus:                          data.OperationStatus,
+			ResponsiblePlannerGroup:                  data.ResponsiblePlannerGroup,
+			OperationUnit:                            data.OperationUnit,
+			StandardLotSizeQuantity:                  data.StandardLotSizeQuantity,
+			MinimumLotSizeQuantity:                   data.MinimumLotSizeQuantity,
+			MaximumLotSizeQuantity:                   data.MaximumLotSizeQuantity,
+			PlainLongText:                            data.PlainLongText,
+			WorkCenter:                               data.WorkCenter,
+			CapacityCategoryCode:                     data.CapacityCategoryCode,
+			OperationCostingRelevancyType:            data.OperationCostingRelevancyType,
+			OperationSetupType:                       data.OperationSetupType,
+			OperationSetupGroupCategory:              data.OperationSetupGroupCategory,
+			OperationSetupGroup:                      data.OperationSetupGroup,
+			OperationReferenceQuantity:               data.OperationReferenceQuantity,
+			MaximumWaitDuration:                      data.MaximumWaitDuration,
+			StandardWaitDuration:                     data.StandardWaitDuration,
+			MinimumWaitDuration:                      data.MinimumWaitDuration,
+			WaitDurationUnit:                         data.WaitDurationUnit,
+			MaximumQueueDuration:                     data.MaximumQueueDuration,
+			StandardQueueDuration:                    data.StandardQueueDuration,
+			MinimumQueueDuration:                     data.MinimumQueueDuration,
+			QueueDurationUnit:                        data.QueueDurationUnit,
+			MaximumMoveDuration:                      data.MaximumMoveDuration,
+			StandardMoveDuration:                     data.StandardMoveDuration,
+			MinimumMoveDuration:                      data.MinimumMoveDuration,
+			MoveDurationUnit:                         data.MoveDurationUnit,
+			StandardDeliveryDuration:                 data.StandardDeliveryDuration,
+			StandardDeliveryDurationUnit:             data.StandardDeliveryDurationUnit,
+			StandardOperationScrapPercent:            data.StandardOperationScrapPercent,
+			CostElement:                              data.CostElement,
+			ValidityStartDate:                        data.ValidityStartDate,
+			ValidityEndDate:                          data.ValidityEndDate,
+			CreationDate:                             data.CreationDate,
+			LastChangeDate:                           data.LastChangeDate,
+			IsMarkedForDeletion:                      data.IsMarkedForDeletion,
+		})
+	}
+	if i == 0 {
+		fmt.Printf("DBに対象のレコードが存在しません。")
+		return &itemOperation, nil
+	}
+
+	return &itemOperation, nil
+}
+
+func ConvertToItemOperationComponent(rows *sql.Rows) (*[]ItemOperationComponent, error) {
+	defer rows.Close()
+	itemOperationComponent := make([]ItemOperationComponent, 0)
+
+	i := 0
+	for rows.Next() {
+		i++
+		pm := &requests.ItemOperationComponent{}
+
+		err := rows.Scan(
+			&pm.Operations,
+			&pm.OperationsItem,
+			&pm.OperationID,
 			&pm.BillOfMaterial,
 			&pm.BillOfMaterialItem,
+			&pm.SupplyChainRelationshipID,
+			&pm.SupplyChainRelationshipDeliveryID,
+			&pm.SupplyChainRelationshipDeliveryPlantID,
+			&pm.SupplyChainRelationshipStockConfPlantID,
+			&pm.ProductionPlantBusinessPartner,
+			&pm.ProductionPlant,
+			&pm.ComponentProduct,
+			&pm.ComponentProductBuyer,
+			&pm.ComponentProductSeller,
+			&pm.ComponentProductDeliverToParty,
+			&pm.ComponentProductDeliverToPlant,
+			&pm.ComponentProductDeliverFromParty,
+			&pm.ComponentProductDeliverFromPlant,
+			&pm.ComponentProductStandardQuantityInBaseUnit,
+			&pm.ComponentProductStandardQuantityInDeliveryUnit,
+			&pm.ComponentProductStandardScrapInPercent,
+			&pm.ComponentProductBaseUnit,
+			&pm.ComponentProductDeliveryUnit,
+			&pm.StockConfirmationBusinessPartner,
+			&pm.StockConfirmationPlant,
+			&pm.StockConfirmationPlantStorageLocation,
 			&pm.IsMarkedForBackflush,
 			&pm.ValidityStartDate,
 			&pm.ValidityEndDate,
 			&pm.CreationDate,
 			&pm.LastChangeDate,
+			&pm.IsMarkedForDeletion,
 		)
 		if err != nil {
 			fmt.Printf("err = %+v \n", err)
-			return &componentAllocation, err
+			return &itemOperationComponent, err
 		}
 
 		data := pm
-		componentAllocation = append(componentAllocation, ComponentAllocation{
-			Operations:           data.Operations,
-			OperationsItem:       data.OperationsItem,
-			BillOfMaterial:       data.BillOfMaterial,
-			BillOfMaterialItem:   data.BillOfMaterialItem,
-			IsMarkedForBackflush: data.IsMarkedForBackflush,
-			ValidityStartDate:    data.ValidityStartDate,
-			ValidityEndDate:      data.ValidityEndDate,
-			CreationDate:         data.CreationDate,
-			LastChangeDate:       data.LastChangeDate,
+		itemOperationComponent = append(itemOperationComponent, ItemOperationComponent{
+
+			Operations:										data.Operations,
+			OperationsItem:									data.OperationsItem,
+			OperationID:									data.OperationID,
+			BillOfMaterial:									data.BillOfMaterial,
+			BillOfMaterialItem:								data.BillOfMaterialItem,
+			SupplyChainRelationshipID:						data.SupplyChainRelationshipID,
+			SupplyChainRelationshipDeliveryID:				data.SupplyChainRelationshipDeliveryID,
+			SupplyChainRelationshipDeliveryPlantID:			data.SupplyChainRelationshipDeliveryPlantID,
+			SupplyChainRelationshipStockConfPlantID:		data.SupplyChainRelationshipStockConfPlantID,
+			ProductionPlantBusinessPartner:					data.ProductionPlantBusinessPartner,
+			ProductionPlant:								data.ProductionPlant,
+			ComponentProduct:								data.ComponentProduct,
+			ComponentProductBuyer:							data.ComponentProductBuyer,
+			ComponentProductSeller:							data.ComponentProductSeller,
+			ComponentProductDeliverToParty:					data.ComponentProductDeliverToParty,
+			ComponentProductDeliverToPlant:					data.ComponentProductDeliverToPlant,
+			ComponentProductDeliverFromParty:				data.ComponentProductDeliverFromParty,
+			ComponentProductDeliverFromPlant:				data.ComponentProductDeliverFromPlant,
+			ComponentProductStandardQuantityInBaseUnit:		data.ComponentProductStandardQuantityInBaseUnit,
+			ComponentProductStandardQuantityInDeliveryUnit:	data.ComponentProductStandardQuantityInDeliveryUnit,
+			ComponentProductStandardScrapInPercent:			data.ComponentProductStandardScrapInPercent,
+			ComponentProductBaseUnit:						data.ComponentProductBaseUnit,
+			ComponentProductDeliveryUnit:					data.ComponentProductDeliveryUnit,
+			StockConfirmationBusinessPartner:				data.StockConfirmationBusinessPartner,
+			StockConfirmationPlant:							data.StockConfirmationPlant,
+			StockConfirmationPlantStorageLocation:			data.StockConfirmationPlantStorageLocation,
+			IsMarkedForBackflush:							data.IsMarkedForBackflush,
+			ValidityStartDate:								data.ValidityStartDate,
+			ValidityEndDate:								data.ValidityEndDate,
+			CreationDate:									data.CreationDate,
+			LastChangeDate:									data.LastChangeDate,
+			IsMarkedForDeletion:							data.IsMarkedForDeletion,
 		})
 	}
 	if i == 0 {
 		fmt.Printf("DBに対象のレコードが存在しません。")
-		return &componentAllocation, nil
+		return &itemOperationComponent, nil
 	}
 
-	return &componentAllocation, nil
+	return &itemOperationComponent, nil
 }

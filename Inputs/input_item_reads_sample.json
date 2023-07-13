@@ -21,7 +21,7 @@
 		"CreationDate": "",
 		"LastChangeDate": "",
 		"PlainLongText": "",
-		"IsMarkedForDeletion": null,
+		"IsMarkedForDeletion": false,
 		"Item": [
 			{
 				"OpeartionsItem": null,
@@ -90,6 +90,6 @@
 		]
 	},
 	"api_schema": "DPFMOperationsReads",
-	"accepter": ["Items"],
+	"accepter": ["Item"],
 	"deleted": false
 }

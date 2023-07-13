@@ -9,10 +9,10 @@ type Header struct {
 	Product                                  string  `json:"Product"`
 	Buyer                                    int     `json:"Buyer"`
 	Seller                                   int     `json:"Seller"`
-	DepartureDeliverFromParty                int     `json:"DepartureDeliverFromParty"`
-	DepartureDeliverFromPlant                string  `json:"DepartureDeliverFromPlant"`
 	DestinationDeliverToParty                int     `json:"DestinationDeliverToParty"`
 	DestinationDeliverToPlant                string  `json:"DestinationDeliverToPlant"`
+	DepartureDeliverFromParty                int     `json:"DepartureDeliverFromParty"`
+	DepartureDeliverFromPlant                string  `json:"DepartureDeliverFromPlant"`
 	OwnerProductionPlantBusinessPartner      int     `json:"OwnerProductionPlantBusinessPartner"`
 	OwnerProductionPlant                     string  `json:"OwnerProductionPlant"`
 	ProductBaseUnit                          string  `json:"ProductBaseUnit"`

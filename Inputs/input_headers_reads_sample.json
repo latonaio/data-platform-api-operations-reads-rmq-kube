@@ -10,17 +10,30 @@
 	"api_type": "reads",
 	"Operations": {
 		"Operations": null,
+		"SupplyChainRelationshipID": null,
+		"SupplyChainRelationshipDeliveryID": null,
+		"SupplyChainRelationshipDeliveryPlantID": null,
+		"SupplyChainRelationshipProductionPlantID": null,
 		"Product": "",
-		"OwnerBusinessPartner": 101,
-		"OwnerPlant": "",
+		"Buyer": null,
+		"Seller": null,
+		"DepartureDeliverFromParty": null,
+		"DepartureDeliverFromPlant": "",
+		"DestinationDeliverToParty": null,
+		"DestinationDeliverToPlant": "",
+		"OwnerProductionPlantBusinessPartner": 201,
+		"OwnerProductionPlant": "",
+		"ProductBaseUnit": "",
+		"ProductDeliveryUnit": "",
+		"ProductProductionUnit": "",
 		"OperationsText": "",
 		"OperationsStatus": "",
 		"ResponsiblePlannerGroup": "",
+		"PlainLongText": "",
 		"ValidityStartDate": "",
 		"ValidityEndDate": "",
 		"CreationDate": "",
 		"LastChangeDate": "",
-		"PlainLongText": "",
 		"IsMarkedForDeletion": false,
 		"Item": [
 			{
@@ -89,7 +102,7 @@
 			}
 		]
 	},
-	"api_schema": "DPFMOperationsReads",
-	"accepter": ["Headers"],
+	"api_schema": "HeaderByOwnerProductionPlantBP",
+	"accepter": ["HeaderByOwnerProductionPlantBP"],
 	"deleted": false
 }

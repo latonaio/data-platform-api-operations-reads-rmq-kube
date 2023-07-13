@@ -22,6 +22,8 @@ func (c *DPFMAPICaller) readSqlProcess(
 ) interface{} {
 	var header *[]dpfm_api_output_formatter.Header
 	var item *[]dpfm_api_output_formatter.Item
+	var itemOperation *[]dpfm_api_output_formatter.ItemOperation
+	var itemOperationComponent *[]dpfm_api_output_formatter.ItemOperationComponent
 	for _, fn := range accepter {
 		switch fn {
 		case "Header":
@@ -40,13 +42,31 @@ func (c *DPFMAPICaller) readSqlProcess(
 			func() {
 				item = c.Items(mtx, input, output, errs, log)
 			}()
+		case "ItemOperation":
+			func() {
+				itemOperation = c.ItemOperation(mtx, input, output, errs, log)
+			}()
+		case "ItemOperations":
+			func() {
+				itemOperation = c.ItemOperations(mtx, input, output, errs, log)
+			}()
+		case "ItemOperationComponent":
+			func() {
+				itemOperationComponent = c.ItemOperationComponent(mtx, input, output, errs, log)
+			}()
+		case "ItemOperationComponents":
+			func() {
+				itemOperationComponent = c.ItemOperationComponents(mtx, input, output, errs, log)
+			}()
 		default:
 		}
 	}
 
 	data := &dpfm_api_output_formatter.Message{
-		Header: header,
-		Item:   item,
+		Header:                 header,
+		Item:                   item,
+		ItemOperation:          itemOperation,
+		ItemOperationComponent: itemOperationComponent,
 	}
 
 	return data
@@ -185,6 +205,166 @@ func (c *DPFMAPICaller) Items(
 	defer rows.Close()
 
 	data, err := dpfm_api_output_formatter.ConvertToItem(rows)
+	if err != nil {
+		*errs = append(*errs, err)
+		return nil
+	}
+
+	return data
+}
+
+func (c *DPFMAPICaller) ItemOperation(
+	mtx *sync.Mutex,
+	input *dpfm_api_input_reader.SDC,
+	output *dpfm_api_output_formatter.SDC,
+	errs *[]error,
+	log *logger.Logger,
+) *[]dpfm_api_output_formatter.ItemOperation {
+	var args []interface{}
+	operations := input.Header.Operations
+	item := input.Header.Item
+
+	cnt := 0
+	for _, v := range item {
+		itemOperation := v.ItemOperation
+		for _, w := range itemOperation {
+			args = append(args, operations, v.OperationsItem, w.OperationID)
+		}
+		cnt++
+	}
+
+	repeat := strings.Repeat("(?,?,?),", cnt-1) + "(?,?,?)"
+	rows, err := c.db.Query(
+		`SELECT *
+		FROM DataPlatformMastersAndTransactionsMysqlKube.data_platform_operations_item_operation_data
+		WHERE (Operations, OpeartionsItem, OperationID) IN ( `+repeat+` );`, args...,
+	)
+	if err != nil {
+		*errs = append(*errs, err)
+		return nil
+	}
+	defer rows.Close()
+
+	data, err := dpfm_api_output_formatter.ConvertToItemOperation(rows)
+	if err != nil {
+		*errs = append(*errs, err)
+		return nil
+	}
+
+	return data
+}
+
+func (c *DPFMAPICaller) ItemOperations(
+	mtx *sync.Mutex,
+	input *dpfm_api_input_reader.SDC,
+	output *dpfm_api_output_formatter.SDC,
+	errs *[]error,
+	log *logger.Logger,
+) *[]dpfm_api_output_formatter.ItemOperation {
+	itemOperation := &dpfm_api_input_reader.ItemOperation{}
+	if len(input.Header.Item) > 0 && len(input.Header.Item[0].ItemOperation) > 0 {
+		itemOperation = &input.Header.Item[0].ItemOperation[0]
+	}
+	where := fmt.Sprintf("WHERE Operations = %v", input.Header.Operations)
+	if input.Header.Item != nil {
+		where = fmt.Sprintf("%s\nAND OperationsItem = %v", where, input.Header.Item[0].OperationsItem)
+	}
+	if itemOperation != nil {
+		if itemOperation.IsMarkedForDeletion != nil {
+			where = fmt.Sprintf("%s\nAND IsMarkedForDeletion = %v", where, *itemOperation.IsMarkedForDeletion)
+		}
+	}
+	rows, err := c.db.Query(
+		`SELECT *
+		FROM DataPlatformMastersAndTransactionsMysqlKube.data_platform_operations_item_operation_data
+		` + where + `;`,
+	)
+	if err != nil {
+		*errs = append(*errs, err)
+		return nil
+	}
+	defer rows.Close()
+
+	data, err := dpfm_api_output_formatter.ConvertToItemOperation(rows)
+	if err != nil {
+		*errs = append(*errs, err)
+		return nil
+	}
+
+	return data
+}
+
+func (c *DPFMAPICaller) ItemOperationComponent(
+	mtx *sync.Mutex,
+	input *dpfm_api_input_reader.SDC,
+	output *dpfm_api_output_formatter.SDC,
+	errs *[]error,
+	log *logger.Logger,
+) *[]dpfm_api_output_formatter.ItemOperationComponent {
+	var args []interface{}
+	cnt := 0
+	for _, v := range input.Header.Item {
+		itemOperation := v.ItemOperation
+		for _, w := range itemOperation {
+			itemOperationComponent := w.ItemOperationComponent
+			for _, y := range itemOperationComponent {
+				args = append(args, w.Operations, w.OperationsItem, w.OperationID, v.BillOfMaterial, y.BillOfMaterialItem)
+			}
+		}
+		cnt++
+	}
+
+	repeat := strings.Repeat("(?,?,?,?,?),", cnt-1) + "(?,?,?,?,?)"
+	rows, err := c.db.Query(
+		`SELECT *
+		FROM DataPlatformMastersAndTransactionsMysqlKube.data-platform-operations-sql-item-operation-component-data
+		WHERE (Operations, OperationsItem, OperationID, BillOfMaterial, BillOfMaterialItem) IN ( `+repeat+` );`, args...,
+	)
+	if err != nil {
+		*errs = append(*errs, err)
+		return nil
+	}
+	defer rows.Close()
+
+	data, err := dpfm_api_output_formatter.ConvertToItemOperationComponent(rows)
+	if err != nil {
+		*errs = append(*errs, err)
+		return nil
+	}
+	return data
+}
+
+func (c *DPFMAPICaller) ItemOperationComponents(
+	mtx *sync.Mutex,
+	input *dpfm_api_input_reader.SDC,
+	output *dpfm_api_output_formatter.SDC,
+	errs *[]error,
+	log *logger.Logger,
+) *[]dpfm_api_output_formatter.ItemOperationComponent {
+	item := &dpfm_api_input_reader.Item{}
+	if len(input.Header.Item) > 0 {
+		item = &input.Header.Item[0]
+	}
+
+	where := fmt.Sprintf("WHERE Operations = %v", input.Header.Operations)
+	if item != nil {
+		if item.IsMarkedForDeletion != nil {
+			where = fmt.Sprintf("%s\nAND IsMarkedForDeletion = %v", where, *item.IsMarkedForDeletion)
+		}
+	}
+
+	rows, err := c.db.Query(
+		`SELECT *
+		FROM DataPlatformMastersAndTransactionsMysqlKube.data_platform_operations_item_data
+		` + where + `;`,
+	)
+	if err != nil {
+		*errs = append(*errs, err)
+		return nil
+	}
+	defer rows.Close()
+
+	data, err := dpfm_api_output_formatter.ConvertToItemOperationComponent(rows)
 	if err != nil {
 		*errs = append(*errs, err)
 		return nil

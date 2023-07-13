@@ -12,26 +12,40 @@
 		"Header": [
 			{
 				"Operations": 310000001,
+				"SupplyChainRelationshipID": 100000087,
+				"SupplyChainRelationshipDeliveryID": 100000087,
+				"SupplyChainRelationshipDeliveryPlantID": 0,
+				"SupplyChainRelationshipProductionPlantID": 0,
 				"Product": "A3750",
-				"OwnerBusinessPartner": 101,
-				"OwnerPlant": "AB01",
-				"OperationsText": null,
+				"Buyer": 201,
+				"Seller": 201,
+				"DestinationDeliverToParty": 201,
+				"DestinationDeliverToPlant": "",
+				"DepartureDeliverFromParty": 201,
+				"DepartureDeliverFromPlant": "",
+				"OwnerProductionPlantBusinessPartner": 201,
+				"OwnerProductionPlant": "TE01",
+				"ProductBaseUnit": "PC",
+				"ProductDeliveryUnit": "PC",
+				"ProductProductionUnit": "PC",
+				"OperationsText": "",
 				"OperationsStatus": null,
 				"ResponsiblePlannerGroup": null,
-				"ValidityStartDate": "2000-01-01",
-				"ValidityEndDate": "9999-12-31",
-				"CreationDate": "2023-05-01",
-				"LastChangeDate": "2023-05-01",
 				"PlainLongText": null,
+				"ValidityStartDate": "2023-05-17",
+				"ValidityEndDate": "2023-05-20",
+				"CreationDate": "2023-05-17",
+				"LastChangeDate": "9999-12-31",
 				"IsMarkedForDeletion": false
 			}
 		],
 		"Item": null,
-		"ComponentAllocation": null
+		"ItemOperation": null,
+		"ItemOperationComponent": null
 	},
-	"api_schema": "DPFMOperationsReads",
+	"api_schema": "HeaderByOwnerProductionPlantBP",
 	"accepter": [
-		"Headers"
+		"HeaderByOwnerProductionPlantBP"
 	],
 	"deleted": false,
 	"sql_update_result": null,
