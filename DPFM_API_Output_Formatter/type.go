@@ -97,6 +97,7 @@ type ItemOperation struct {
 	Operations                               int      `json:"Operations"`
 	OperationsItem                           int      `json:"OperationsItem"`
 	OperationID                              int      `json:"OperationID"`
+	OperationType                            string   `json:"OperationType"`
 	SupplyChainRelationshipID                int      `json:"SupplyChainRelationshipID"`
 	SupplyChainRelationshipDeliveryID        int      `json:"SupplyChainRelationshipDeliveryID"`
 	SupplyChainRelationshipDeliveryPlantID   int      `json:"SupplyChainRelationshipDeliveryPlantID"`
@@ -121,7 +122,7 @@ type ItemOperation struct {
 	MaximumLotSizeQuantity                   *float32 `json:"MaximumLotSizeQuantity"`
 	PlainLongText                            *string  `json:"PlainLongText"`
 	WorkCenter                               *int     `json:"WorkCenter"`
-	CapacityCategoryCode                     *string  `json:"CapacityCategoryCode"`
+	CapacityCategory	                     *string  `json:"CapacityCategory"`
 	OperationCostingRelevancyType            *string  `json:"OperationCostingRelevancyType"`
 	OperationSetupType                       *string  `json:"OperationSetupType"`
 	OperationSetupGroupCategory              *string  `json:"OperationSetupGroupCategory"`

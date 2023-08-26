@@ -5,11 +5,11 @@
 	"filepath": "/var/lib/aion/Data/rededge_sdc/abcdef.json",
 	"api_status_code": 200,
 	"runtime_session_id": "boi9ar543dg91ipdnspi099u231280ab0v8af0ew",
-	"business_partner": 101,
+	"business_partner": null,
 	"service_label": "OPERATIONS",
 	"api_type": "reads",
 	"Operations": {
-		"Operations": 310000001,
+		"Operations": null,
 		"SupplyChainRelationshipID": null,
 		"SupplyChainRelationshipDeliveryID": null,
 		"SupplyChainRelationshipDeliveryPlantID": null,
@@ -21,7 +21,7 @@
 		"DepartureDeliverFromPlant": "",
 		"DestinationDeliverToParty": null,
 		"DestinationDeliverToPlant": "",
-		"OwnerProductionPlantBusinessPartner": 201,
+		"OwnerProductionPlantBusinessPartner": null,
 		"OwnerProductionPlant": "",
 		"ProductBaseUnit": "",
 		"ProductDeliveryUnit": "",
@@ -34,11 +34,10 @@
 		"ValidityEndDate": "",
 		"CreationDate": "",
 		"LastChangeDate": "",
-		"IsMarkedForDeletion": false,
+		"IsMarkedForDeletion": null,
 		"Item": [
 			{
-				"Operations": 310000001,
-				"OperationsItem": 1,
+				"OpeartionsItem": null,
 				"SupplyChainRelationshipID": null,
 				"SupplyChainRelationshipDeliveryID": null,
 				"SupplyChainRelationshipDeliveryPlantID": null,
@@ -46,17 +45,17 @@
 				"Product": "",
 				"Buyer": null,
 				"Seller": null,
-				"DeliverToParty": null,
-				"DeliverToPlant": "",
 				"DeliverFromParty": null,
 				"DeliverFromPlant": "",
+				"DeliverToParty": null,
+				"DeliverToPlant": "",
 				"ProductionPlantBusinessPartner": null,
 				"ProductionPlant": "",
 				"OperationsText": "",
 				"BillOfMaterial": null,
-				"OperationsStatus": null,
-				"ResponsiblePlannerGroup": null,
-				"OperationsUnit": null,
+				"OperationsStatus": "",
+				"ResponsiblePlannerGroup": "",
+				"OperationsUnit": "",
 				"StandardLotSizeQuantity": null,
 				"MinimumLotSizeQuantity": null,
 				"MaximumLotSizeQuantity": null,
@@ -69,10 +68,8 @@
 				"IsMarkedForDeletion": null,
 				"ItemOperation": [
 					{
-						"Operations": 310000001,
-						"OperationsItem": 1,
-						 /*↓DBテーブルが無いためデータを入れていません。入力をお願いします。*/
 						"OperationID": null,
+						"OperationType": "",
 						"SupplyChainRelationshipID": null,
 						"SupplyChainRelationshipDeliveryID": null,
 						"SupplyChainRelationshipDeliveryPlantID": null,
@@ -80,15 +77,17 @@
 						"Product": "",
 						"Buyer": null,
 						"Seller": null,
-						"DeliverToParty": null,
-						"DeliverToPlant": "",
 						"DeliverFromParty": null,
 						"DeliverFromPlant": "",
+						"DeliverToParty": null,
+						"DeliverToPlant": "",
 						"ProductionPlantBusinessPartner": null,
 						"ProductionPlant": "",
 						"Sequence": null,
 						"SequenceText": "",
 						"OperationText": "",
+						"ValidityStartDate": "",
+						"ValidityEndDate": "",
 						"OperationStatus": "",
 						"ResponsiblePlannerGroup": "",
 						"OperationUnit": "",
@@ -97,37 +96,32 @@
 						"MaximumLotSizeQuantity": null,
 						"PlainLongText": "",
 						"WorkCenter": null,
-						"CapacityCategoryCode": "",
+						"CapacityCategory": "",
 						"OperationCostingRelevancyType": "",
 						"OperationSetupType": "",
 						"OperationSetupGroupCategory": "",
 						"OperationSetupGroup": "",
-						"OperationReferenceQuantity": null,
 						"MaximumWaitDuration": null,
 						"StandardWaitDuration": null,
 						"MinimumWaitDuration": null,
 						"WaitDurationUnit": "",
-						"MaximumQueueDuration": null,
+						"MaximumQueDuration": null,
 						"StandardQueueDuration": null,
 						"MinimumQueueDuration": null,
-						"QueueDurationUnit": "",
+						"QueDurationUnit": "",
 						"MaximumMoveDuration": null,
 						"StandardMoveDuration": null,
 						"MinimumMoveDuration": null,
 						"MoveDurationUnit": "",
 						"StandardDeliveryDuration": null,
-						"StandardDeliveryDurationUnit": null,
+						"StandardDeliveryDurationUnit": "",
 						"StandardOperationScrapPercent": null,
 						"CostElement": "",
-						"ValidityStartDate": "",
-						"ValidityEndDate": "",
 						"CreationDate": "",
 						"LastChangeDate": "",
-						"IsMarkedForDeletion": false,
+						"IsMarkedForDeletion": null,
 						"ItemOperationComponent": [
 							{
-								"Operations": null,
-								"OperationsItem": null,
 								"OperationID": null,
 								"BillOfMaterial": null,
 								"BillOfMaterialItem": null,
@@ -140,10 +134,10 @@
 								"ComponentProduct": "",
 								"ComponentProductBuyer": null,
 								"ComponentProductSeller": null,
-								"ComponentProductDeliverToParty": null,
-								"ComponentProductDeliverToPlant": "",
 								"ComponentProductDeliverFromParty": null,
 								"ComponentProductDeliverFromPlant": "",
+								"ComponentProductDeliverToParty": null,
+								"ComponentProductDeliverToPlant": "",
 								"ComponentProductStandardQuantityInBaseUnit": null,
 								"ComponentProductStandardQuantityInDeliveryUnit": null,
 								"ComponentProductStandardScrapInPercent": null,
@@ -152,22 +146,44 @@
 								"StockConfirmationBusinessPartner": null,
 								"StockConfirmationPlant": "",
 								"StockConfirmationPlantStorageLocation": "",
-								"IsMarkedForBackflush": false,
+								"IsMarkedForBackflush": null,
 								"ValidityStartDate": "",
 								"ValidityEndDate": "",
 								"CreationDate": "",
 								"LastChangeDate": "",
-								"IsMarkedForDeletion": false
+								"IsMarkedForDeletion": null
 							}
 						]
 					}
 				]
 			}
+		],
+		"HeaderDoc": [
+			{
+				"DocType": "",
+				"DocVersionID": null,
+				"DocID": "",
+				"FileExtension": "",
+				"FileName": "",
+				"FilePath": "",
+				"DocIssuerBusinessPartner": null,
+				"ItemDoc": [
+					{
+						"OperationsItem": null,
+						"DocType": "",
+						"DocVersionID": null,
+						"DocID": "",
+						"FileExtension": "",
+						"FileName": "",
+						"FilePath": "",
+						"DocIssuerBusinessPartner": null
+					}
+				]
+			}
 		]
 	},
-	"api_schema": "HeaderByOwnerProductionPlantBP",
+	"api_schema": "DPFMOperationsReads",
 	"accepter": [
-		"ItemOperation"
-	],
-	"deleted": false
+		"Header"
+	]
 }
